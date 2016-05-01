@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
 		case 0:
 			mkch(argv[2]);
 			post(argv[2]);
-			break;E
+			break;
 		default:
 			mkch(argv[1]);
 			get(argv[1]);

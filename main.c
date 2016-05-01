@@ -15,11 +15,10 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
-	register int i = 0;
-
 	int stats_size = 4,
 		stats_shm_size = stats_size * sizeof(int),
-		stats_shm_id = shmget(IPC_PRIVATE, stats_shm_size, 0666 | IPC_CREAT);
+		stats_shm_id = shmget(IPC_PRIVATE, stats_shm_size, 0666 | IPC_CREAT),
+		i = 0;
 	
 	stats = shmat(stats_shm_id, NULL, 0);
 
@@ -30,8 +29,6 @@ int main(int argc, char *argv[]) {
 	signal(SIGQUIT, sigquit_listener);
 	signal(SIGUSR1, stats_listener);
 	signal(SIGUSR2, exit_listener);
-
-
 
 	switch(child_pid = fork()) {
 		case -1:

@@ -7,6 +7,11 @@
 #include "constants.h"
 #include "../listeners/stats.h"
 
+/**
+ * @name post [read bytes from named pipe]
+ * @params to {char*} write to file from "to" path 
+ * @retval void
+ */
 void post(char * to) {
 	char buffer[BUFFER_SIZE];
 	int ok, fd = open(to, O_RDWR);

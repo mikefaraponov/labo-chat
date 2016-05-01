@@ -5,6 +5,11 @@
 
 #include "constants.h"
 
+/**
+ *	@name mkch [make channel(named pipe)]
+ *  @params where to position fifofile (usually /tmp/<your-channel>)
+ *	@retval void
+ */
 void mkch(char * path) {
 	int ok = mkfifo(path, 0666);
 	if(ok == -1 && errno != EEXIST) {

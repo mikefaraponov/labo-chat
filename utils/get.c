@@ -8,6 +8,11 @@
 #include "constants.h"
 #include "../listeners/stats.h"
 
+/**
+ * @name get [read bytes from named pipe]
+ * @params from {char*} string from where read bytes
+ * @retval void
+ */
 void get(char * from){
 	char buffer[BUFFER_SIZE];
 	int ok, fd = open(from, O_RDWR);

@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <unistd.h>
-#include "exit.h"
+
+extern pid_t child_pid;
 
 void exit_listener(int sig) {
 	kill(child_pid? child_pid : getppid(), SIGQUIT);

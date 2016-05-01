@@ -10,9 +10,17 @@ pid_t child_pid;
 
 int main(int argc, char *argv[]) {
 
-	int i = 0;
-	int stats_size = 4;
-	int stats_shm_id = shmget(IPC_PRIVATE, stats_size * sizeof(int), 0666 | IPC_CREAT);
+	if(argc != 3) {
+		puts("Using: Chat <get-from> <post-to>");
+		exit(EXIT_FAILURE);
+	}
+
+	register int i = 0;
+
+	int stats_size = 4,
+		stats_shm_size = stats_size * sizeof(int),
+		stats_shm_id = shmget(IPC_PRIVATE, stats_shm_size, 0666 | IPC_CREAT);
+	
 	stats = shmat(stats_shm_id, NULL, 0);
 
 	while(i < stats_size) {
@@ -23,26 +31,20 @@ int main(int argc, char *argv[]) {
 	signal(SIGUSR1, stats_listener);
 	signal(SIGUSR2, exit_listener);
 
-	if(argc != 3) {
-		puts("Using: Chat <get-from> <post-to>");
-		exit(1);
-	}
+
 
 	switch(child_pid = fork()) {
 		case -1:
 			perror("Forking error");
-			exit(1);
+			exit(EXIT_FAILURE);
 		case 0:
 			mkch(argv[2]);
 			post(argv[2]);
-			break;
+			break;E
 		default:
 			mkch(argv[1]);
 			get(argv[1]);
 	}
 
-	// int status = -1;
-	// waitpid(child_pid, &status, WEXITED);
-
-	return 0;
+	return EXIT_SUCCESS;
 }

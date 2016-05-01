@@ -8,7 +8,7 @@
 #include "../listeners/stats.h"
 
 /**
- * @name post [read bytes from named pipe]
+ * @name post [write bytes to named pipe]
  * @params to {char*} write to file from "to" path 
  * @retval void
  */

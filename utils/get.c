@@ -1,11 +1,12 @@
-#include "constants.h"
 #include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
 #include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
 #include <assert.h>
-#include <memory.h>
-#include "stats.h"
+#include <string.h>
+
+#include "constants.h"
+#include "../listeners/stats.h"
 
 void get(char * from){
 	char buffer[BUFFER_SIZE];

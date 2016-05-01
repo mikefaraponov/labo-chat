@@ -4,20 +4,26 @@ prefix=/usr/local
 
 all: chat
 
-chat: get.o post.o main.o mkch.o
-	$(CC) get.o post.o main.o mkch.o -o Chat
+chat: get.o post.o main.o mkch.o exit.o stats.o
+	$(CC) get.o post.o main.o mkch.o exit.o stats.o -o Chat
 
-get.o: get.c
-	$(CC) $(CFLAGS) get.c
+get.o: utils/get.c
+	$(CC) $(CFLAGS) utils/get.c
 
-post.o: post.c
-	$(CC) $(CFLAGS) post.c
+post.o: utils/post.c
+	$(CC) $(CFLAGS) utils/post.c
 
 main.o: main.c 
 	$(CC) $(CFLAGS) main.c
 
-mkch.o: mkch.c
-	$(CC) $(CFLAGS) mkch.c
+mkch.o: utils/mkch.c
+	$(CC) $(CFLAGS) utils/mkch.c
+
+exit.o: listeners/exit.c
+	$(CC) $(CFLAGS) listeners/exit.c
+
+stats.o: listeners/stats.c
+	$(CC) $(CFLAGS) listeners/stats.c
 
 install:
 	install -m 0755 Chat $(prefix)/bin

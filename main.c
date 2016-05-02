@@ -15,7 +15,6 @@ int main(int argc, char *argv[]) {
 		case 0:
 			mkch(argv[POST_TO]);
 			post(argv[POST_TO]);
-			break;
 		default:
 			mkch(argv[GET_FROM]);
 			get(argv[GET_FROM]);

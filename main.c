@@ -35,12 +35,11 @@ int main(int argc, char *argv[]) {
 			perror("Forking error");
 			exit(EXIT_FAILURE);
 		case 0:
-			mkch(argv[2]);
-			post(argv[2]);
-			break;
+			mkch(argv[POST_TO]);
+			post(argv[POST_TO]);
 		default:
-			mkch(argv[1]);
-			get(argv[1]);
+			mkch(argv[GET_FROM]);
+			get(argv[GET_FROM]);
 	}
 
 	return EXIT_SUCCESS;

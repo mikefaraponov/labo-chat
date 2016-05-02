@@ -7,17 +7,17 @@ all: chat
 chat: get.o post.o main.o mkch.o
 	$(CC) get.o post.o main.o mkch.o -o Chat
 
-get.o: get.c
-	$(CC) $(CFLAGS) get.c
+get.o: utils/get.c
+	$(CC) $(CFLAGS) utils/get.c
 
-post.o: post.c
-	$(CC) $(CFLAGS) post.c
+post.o: utils/post.c
+	$(CC) $(CFLAGS) utils/post.c
 
 main.o: main.c 
 	$(CC) $(CFLAGS) main.c
-
-mkch.o: mkch.c
-	$(CC) $(CFLAGS) mkch.c
+	
+mkch.o: utils/mkch.c
+	$(CC) $(CFLAGS) utils/mkch.c
 
 install:
 	install -m 0755 Chat $(prefix)/bin

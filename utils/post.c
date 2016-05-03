@@ -7,7 +7,7 @@
 #include <signal.h>
 #include "constants.h"
 #include "../listeners/stats.h"
-
+#include "./shared.h"
 /**
  * @name post [write bytes to named pipe]
  * @params to {char*} write to file from "to" path 
@@ -21,13 +21,15 @@ void post(char * to) {
 
 	while(1) {
 		fgets(buffer, BUFFER_SIZE, stdin);
+		if( strcmp(buffer, STATS_WORD) == 0 ) {
+			kill(getpid(), SIGUSR1);
+			continue;
+		}
 		ok = write(fd, buffer, strlen(buffer) + 1);
 		assert(ok != -1);
-		if( strcmp(buffer, EXIT_WORD) == 0 ) {
-			printf("bye-bye\n");
+		if( strcmp(buffer, EXIT_WORD) == 0 )
 			kill(getpid(), SIGUSR2);
-		}
-		stats[OUTPUT_CHARS] += strlen(buffer);
+		stats[OUTPUT_CHARS] += letters(buffer);
 		stats[OUTPUT_MSGS]++;
 	}
 }

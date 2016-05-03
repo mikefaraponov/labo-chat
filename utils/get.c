@@ -7,6 +7,7 @@
 #include <signal.h>
 #include "constants.h"
 #include "../listeners/stats.h"
+#include "./shared.h"
 
 /**
  * @name get [read bytes from named pipe]
@@ -22,12 +23,11 @@ void get(char * from) {
 	while(1) {
 		ok = read(fd, buffer, BUFFER_SIZE);
 		assert(ok != -1);
-		if( strcmp(buffer, EXIT_WORD) == 0 ) {
-			printf("bye-bye\n");
+		if( strcmp(buffer, EXIT_WORD) == 0 )
 			kill(getpid(), SIGUSR2);
-		}
-		stats[INPUT_CHARS] += strlen(buffer);
+		stats[INPUT_CHARS] += letters(buffer);
 		stats[INPUT_MSGS]++;
 		printf("%s", buffer);
 	}
 }
+

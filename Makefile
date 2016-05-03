@@ -4,8 +4,11 @@ prefix=/usr/local
 
 all: chat
 
-chat: get.o post.o main.o mkch.o exit.o stats.o
-	$(CC) get.o post.o main.o mkch.o exit.o stats.o -o Chat
+chat: get.o post.o main.o mkch.o exit.o stats.o letters.o
+	$(CC) get.o post.o main.o mkch.o exit.o stats.o letters.o -o Chat
+
+letters.o: utils/letters.c
+	$(CC) $(CFLAGS) utils/letters.c
 
 get.o: utils/get.c
 	$(CC) $(CFLAGS) utils/get.c
@@ -18,6 +21,7 @@ main.o: main.c
 
 mkch.o: utils/mkch.c
 	$(CC) $(CFLAGS) utils/mkch.c
+
 
 exit.o: listeners/exit.c
 	$(CC) $(CFLAGS) listeners/exit.c

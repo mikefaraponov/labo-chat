@@ -6,6 +6,7 @@
 extern pid_t child_pid;
 
 void exit_listener(int sig) {
+	printf("bye-bye\n");
 	kill(child_pid? child_pid : getppid(), SIGQUIT);
 	exit(0);
 }

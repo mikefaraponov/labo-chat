@@ -1,8 +1,3 @@
-#include <signal.h>
-#include <wait.h>
-#include <sys/ipc.h>
-#include <sys/shm.h>
-
 #include "libs/chat.h"
 
 int * stats;

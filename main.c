@@ -1,4 +1,4 @@
-#include "libs/chat.h"
+#include "chat.h"
 
 int * stats;
 pid_t child_pid;
